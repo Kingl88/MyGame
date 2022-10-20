@@ -1,0 +1,76 @@
+
+standAndRun.png
+size: 256, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+run
+  rotate: false
+  xy: 2, 65
+  size: 45, 57
+  orig: 64, 64
+  offset: 10, 0
+  index: 6
+run
+  rotate: false
+  xy: 2, 6
+  size: 42, 57
+  orig: 64, 64
+  offset: 12, 0
+  index: 2
+run
+  rotate: false
+  xy: 49, 65
+  size: 37, 57
+  orig: 64, 64
+  offset: 14, 0
+  index: 1
+run
+  rotate: false
+  xy: 46, 7
+  size: 38, 56
+  orig: 64, 64
+  offset: 14, 0
+  index: 5
+run
+  rotate: false
+  xy: 88, 67
+  size: 37, 55
+  orig: 64, 64
+  offset: 14, 0
+  index: 7
+run
+  rotate: false
+  xy: 127, 66
+  size: 31, 56
+  orig: 64, 64
+  offset: 17, 0
+  index: 3
+run
+  rotate: false
+  xy: 160, 67
+  size: 26, 55
+  orig: 64, 64
+  offset: 20, 0
+  index: 4
+run
+  rotate: false
+  xy: 188, 68
+  size: 26, 54
+  orig: 64, 64
+  offset: 20, 0
+  index: 8
+stand
+  rotate: false
+  xy: 216, 62
+  size: 24, 60
+  orig: 64, 64
+  offset: 20, 0
+  index: 2
+stand
+  rotate: false
+  xy: 86, 2
+  size: 24, 61
+  orig: 64, 64
+  offset: 20, 0
+  index: 1
