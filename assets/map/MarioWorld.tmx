@@ -9,25 +9,46 @@
   </data>
  </layer>
  <objectgroup id="3" name="env">
-  <object id="4" x="10" y="170" width="637" height="29"/>
-  <object id="5" x="260.091" y="100.727" width="114.545" height="27.5455"/>
+  <object id="4" x="10" y="170" width="637" height="29">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="5" x="260.091" y="100.727" width="114.545" height="27.5455">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="4" name="dyn">
-  <object id="24" x="96.6667" y="-53.3333" width="17.3333" height="10"/>
-  <object id="25" x="160" y="-37.3333" width="28.6667" height="16"/>
-  <object id="26" x="266" y="-12" width="9.33333" height="0.666667"/>
-  <object id="27" x="366" y="-39.3333" width="43.3333" height="19.3333"/>
-  <object id="28" x="369.333" y="16" width="21.3333" height="26"/>
-  <object id="29" x="248.667" y="43.3333" width="9.33333" height="14.6667"/>
-  <object id="30" x="111.333" y="68.6667" width="6.66667" height="13.3333"/>
-  <object id="31" x="438.667" y="93.3333" width="27.3333" height="19.3333"/>
-  <object id="32" x="492.667" y="-27.3333" width="76.6667" height="44"/>
-  <object id="33" x="460" y="-93.3333" width="22.6667" height="20"/>
-  <object id="34" x="270.667" y="-93.3333" width="22" height="12"/>
-  <object id="35" x="52.6667" y="-38.6667" width="8.66667" height="11.3333"/>
+  <object id="29" x="488" y="109.333" width="9.33333" height="14.6667">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="hero">
-  <object id="36" name="Hero" x="307.333" y="-20.6667" width="16" height="16"/>
+  <object id="36" name="Hero" x="307.333" y="-20.6667" width="12" height="64">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="2" name="Слой тайлов 2" width="82" height="26">
   <data encoding="base64" compression="zlib">

@@ -23,6 +23,7 @@ public class MyAtlasAnim {
     public void setTime(float dT) {
         time += dT;
     }
+    public void putTime(float time){this.time = time;}
     public void dispose(){
         this.atlas.dispose();
     }
