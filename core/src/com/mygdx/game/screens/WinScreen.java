@@ -6,21 +6,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.awt.*;
 
-public class MenuScreen implements Screen {
+public class WinScreen implements Screen {
     Game game;
-    Texture fon, sign;
+    Texture fon;
     SpriteBatch spriteBatch;
-    int x, y;
-    Rectangle rectangle;
-    public MenuScreen(Game game) {
+
+    public WinScreen(Game game) {
         this.game = game;
-        fon = new Texture("background.png");
-        sign = new Texture("play.png");
-        x = Gdx.graphics.getWidth()/2 - sign.getWidth()/2;
-        y = Gdx.graphics.getHeight()/2;
-        rectangle = new Rectangle(x, y, sign.getWidth(), sign.getHeight());
+        fon = new Texture("WinScreen.jpg");
         spriteBatch = new SpriteBatch();
     }
 
@@ -33,13 +27,10 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         spriteBatch.begin();
         spriteBatch.draw(fon, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        spriteBatch.draw(sign, x, y);
         spriteBatch.end();
         if(Gdx.input.isTouched()){
-            if(rectangle.contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 dispose();
                 game.setScreen(new GameScreen(game));
-            }
         }
     }
 
@@ -66,7 +57,6 @@ public class MenuScreen implements Screen {
     @Override
     public void dispose() {
         this.fon.dispose();
-        this.sign.dispose();
         this.spriteBatch.dispose();
 
     }

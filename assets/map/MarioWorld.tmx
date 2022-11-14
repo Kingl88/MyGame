@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="82" height="26" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="38">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="82" height="26" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="50">
  <tileset firstgid="1" name="Mario" tilewidth="8" tileheight="8" spacing="1" tilecount="25080" columns="132">
   <image source="Mario.png" width="1188" height="1711"/>
  </tileset>
- <layer id="1" name="Слой тайлов 1" width="82" height="26">
+ <layer id="1" name="back" width="82" height="26">
   <data encoding="base64" compression="zlib">
-   eJztxzkOgDAUA1F3Se7I0rBcGUjDchHc5ABfokGaJ41kSwAAAAAAAAAAAMA/bUna3eFq4kd/02Wpd4MbMz/6m9P7crd7Mj/6m6lIs1vcWvjRj++8uQDRYQ==
+   eJztzjkOwkAQRNHKPE7ZCeyTYZOw3AawgbthSFguQiVzgJEsGaT/pC91ZS0BAAAAAPA7DoV0dCfXuNad3cVdi6G/+x+jUhq7iZu6mZu7hVuWQ38HAAAA9OeWSZ27u0fGTt3RKkiVq906sFN39PT9cm/3CezUHW1yaet2bp+zUzf68wUNNthx
   </data>
  </layer>
  <objectgroup id="3" name="env">
-  <object id="4" x="10" y="170" width="637" height="29">
+  <object id="4" name="Ground" x="10" y="170" width="637" height="29">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -18,7 +18,43 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="5" x="260.091" y="100.727" width="114.545" height="27.5455">
+  <object id="5" name="Ground" x="260.091" y="100.727" width="114.545" height="20.8788">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="46" x="0" y="-44" width="10" height="242.666">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="47" x="646.333" y="-42.9998" width="10" height="243.333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="48" x="10.6667" y="-42.6667" width="636" height="5.33333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="49" name="flame" x="288" y="87.75" width="64.25" height="16.25">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -29,7 +65,52 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="dyn">
-  <object id="29" x="488" y="109.333" width="9.33333" height="14.6667">
+  <object id="29" name="Coins" x="488" y="109.333" width="9.33333" height="14.6667">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="41" name="Coins" x="531.333" y="80.6667" width="16.6667" height="19.3333">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="42" name="Coins" x="412" y="50.6667" width="17.3333" height="23.3333">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="43" name="Coins" x="156" y="56.6667" width="20.6667" height="20.6667">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="44" name="Coins" x="66" y="86" width="16.6667" height="26.6667">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="45" name="Coins" x="134.667" y="108" width="37.3333" height="22.6667">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
@@ -40,7 +121,7 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="hero">
-  <object id="36" name="Hero" x="307.333" y="-20.6667" width="12" height="64">
+  <object id="36" name="Hero" x="256.333" y="31.6666" width="12" height="10">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
@@ -50,9 +131,9 @@
    </properties>
   </object>
  </objectgroup>
- <layer id="2" name="Слой тайлов 2" width="82" height="26">
+ <layer id="2" name="front" width="82" height="26">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
 </map>
