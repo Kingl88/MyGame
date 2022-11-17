@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.persons.Man;
 
 public class MyInputProcessor implements InputProcessor {
     private Vector2 outForce;
@@ -19,10 +20,14 @@ public class MyInputProcessor implements InputProcessor {
     public boolean keyDown(int keycode) {
         String inKey = Input.Keys.toString(keycode).toUpperCase();
         switch (inKey) {
-            case "LEFT", "A" -> outForce.add(-0.5f, 0);
-            case "RIGHT", "D" -> outForce.add(0.5f, 0);
-            case "DOWN", "S" -> outForce.add(0, -0.1f);
-            case "SPACE" -> outForce.add(0, 2.5f);
+            case "LEFT", "A" -> outForce.add(-0.05f, 0);
+            case "RIGHT", "D" -> outForce.add(0.05f, 0);
+            case "DOWN", "S" -> outForce.add(0, -0.25f);
+            case "SPACE" -> {
+                if (Man.canJump && Man.onGround) {
+                    outForce.add(0, 0.25f);
+                }
+            }
         }
         return true;
     }
@@ -31,10 +36,10 @@ public class MyInputProcessor implements InputProcessor {
     public boolean keyUp(int keycode) {
         String inKey = Input.Keys.toString(keycode).toUpperCase();
         switch (inKey) {
-            case "LEFT", "A" -> outForce.add(0, outForce.y);
-            case "RIGHT", "D" -> outForce.add(0, outForce.y);
-            case "DOWN", "S" -> outForce.add(outForce.x, 0);
-            case "SPACE" -> outForce.add(outForce.x, 0);
+            case "LEFT", "A" -> outForce.add(-outForce.x, 0);
+            case "RIGHT", "D" -> outForce.add(-outForce.x, 0);
+            case "DOWN", "S" -> outForce.add(0, -outForce.y);
+            case "SPACE" -> outForce.add(0, -outForce.y);
         }
         return true;
     }
