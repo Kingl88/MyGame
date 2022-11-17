@@ -19,10 +19,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.MyAnim;
+import com.mygdx.game.*;
 import com.mygdx.game.persons.Man;
-import com.mygdx.game.MyInputProcessor;
-import com.mygdx.game.PhysX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +39,7 @@ public class GameScreen implements Screen {
     private int countCoins = 0;
     private final MyAnim coinAnm;
     private TiledMap map;
+    private final MyFont font;
 
     private OrthogonalTiledMapRenderer mapRenderer;
 
@@ -51,6 +50,7 @@ public class GameScreen implements Screen {
     public GameScreen(Game game) {
         coinAnm = new MyAnim("Full Coins.png", 1, 8, 12, Animation.PlayMode.LOOP);
         this.game = game;
+        font = new MyFont(30);
 
         map = new TmxMapLoader().load("map/MarioWorld.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -63,7 +63,7 @@ public class GameScreen implements Screen {
         Array<RectangleMapObject> objects = map.getLayers().get("env").getObjects().getByType(RectangleMapObject.class);
         objects.addAll(map.getLayers().get("dyn").getObjects().getByType(RectangleMapObject.class));
         for (int i = 0; i < objects.size; i++) {
-            physX.addObject(objects.get(i));
+           body = physX.addObject(objects.get(i));
         }
 
         body = physX.addObject((RectangleMapObject) map.getLayers().get("hero").getObjects().get("Hero"));
@@ -96,6 +96,8 @@ public class GameScreen implements Screen {
         camera.zoom = 1;
         camera.update();
 
+        if(MyContactListener.isDamage){man.getHit(1);}
+
         mapRenderer.setView(camera);
         mapRenderer.render();
 
@@ -120,9 +122,12 @@ public class GameScreen implements Screen {
             float cy = body.getPosition().y * PhysX.PPM - tr.getRegionHeight() / 2f / dScale;
             float cW = tr.getRegionWidth() / PhysX.PPM / dScale;
             float cH = tr.getRegionHeight() / PhysX.PPM / dScale;
+            body.setFixedRotation(true);
             ((PolygonShape) body.getFixtureList().get(0).getShape()).setAsBox(cW / 2, cH / 2);
+            ((PolygonShape) body.getFixtureList().get(1).getShape()).setAsBox(cW/1.3f, cH/1.3f);
             batch.draw(coinAnm.draw(), cx, cy, cW * physX.PPM, cH * physX.PPM);
         }
+        font.draw(batch, "HP: " + (int)man.getHit(0) + " Coins: " + countCoins, (int)tmp.x, (int)(tmp.y + 2 * tmp.height * PhysX.PPM));
         batch.end();
         for (Body body : bodeToDelete) {
             physX.removeBody(body);
@@ -135,9 +140,8 @@ public class GameScreen implements Screen {
             dispose();
             game.setScreen(new WinScreen(game));
         }
-        if (destroy){
+        if (man.getHit(0) < 0){
             dispose();
-            destroy = false;
             game.setScreen(new GameOverScreen(game));
         }
     }
