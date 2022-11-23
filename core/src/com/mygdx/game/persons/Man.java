@@ -25,8 +25,10 @@ public class Man {
     private Dir dir;
     private static float dScale = 1.4f;
     public enum Dir{LEFT, RIGHT}
+    private float hitPoints, live;
 
     public Man(Body body) {
+        hitPoints = live = 100;
         this.body = body;
         atl = new TextureAtlas("atlas/MyPerson.atlas");
         manAssets.put(Actions.STAND,new Animation<TextureRegion>(FPS, atl.findRegions("stand")));
@@ -35,6 +37,10 @@ public class Man {
         baseAnm = manAssets.get(Actions.STAND);
         loop = true;
         dir = Dir.LEFT;
+    }
+    public float getHit(float damage){
+        hitPoints -= damage;
+        return hitPoints;
     }
     public boolean isCanJump(){return canJump;}
     public static void setCanJump(boolean isJump){canJump = isJump;}

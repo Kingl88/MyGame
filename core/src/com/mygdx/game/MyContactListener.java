@@ -5,35 +5,50 @@ import com.mygdx.game.persons.Man;
 import com.mygdx.game.screens.GameScreen;
 
 public class MyContactListener implements ContactListener {
+    public static boolean isDamage;
+
     @Override
     public void beginContact(Contact contact) {
         Fixture a = contact.getFixtureA();
         Fixture b = contact.getFixtureB();
-        if(a.getUserData().equals("legs") && b.getUserData().equals("Ground")){
+        if (a.getUserData().equals("legs") && b.getUserData().equals("Ground")) {
             Man.setCanJump(true);
             Man.onGround = true;
         }
-        if(b.getUserData().equals("legs") && a.getUserData().equals("Ground")){
+        if (b.getUserData().equals("legs") && a.getUserData().equals("Ground")) {
             Man.onGround = true;
             Man.setCanJump(true);
         }
-        if(a.getUserData().equals("legs") && b.getUserData().equals("flame")){
-            GameScreen.destroy = true;
+        if (a.getUserData().equals("legs") && b.getUserData().equals("flameSensor")) {
+            isDamage = true;
         }
-        if(b.getUserData().equals("legs") && a.getUserData().equals("flame")){
-            GameScreen.destroy = true;
+        if (b.getUserData().equals("legs") && a.getUserData().equals("flameSensor")) {
+            isDamage = true;
         }
+        if (a.getUserData().equals("Hero") && b.getUserData().equals("CoinsSensor")) {
+            GameScreen.bodeToDelete.add(b.getBody());
+        }
+        if (b.getUserData().equals("Hero") && a.getUserData().equals("CoinsSensor")) {
+            GameScreen.bodeToDelete.add(a.getBody());
+        }
+
     }
 
     @Override
     public void endContact(Contact contact) {
         Fixture a = contact.getFixtureA();
         Fixture b = contact.getFixtureB();
-        if(a.getUserData().equals("legs") && b.getUserData().equals("Ground")){
+        if (a.getUserData().equals("legs") && b.getUserData().equals("Ground")) {
             Man.onGround = false;
         }
-        if(b.getUserData().equals("legs") && a.getUserData().equals("Ground")){
+        if (b.getUserData().equals("legs") && a.getUserData().equals("Ground")) {
             Man.onGround = false;
+        }
+        if (a.getUserData().equals("legs") && b.getUserData().equals("flameSensor")) {
+            isDamage = false;
+        }
+        if (b.getUserData().equals("legs") && a.getUserData().equals("flameSensor")) {
+            isDamage = false;
         }
     }
 
@@ -41,12 +56,7 @@ public class MyContactListener implements ContactListener {
     public void preSolve(Contact contact, Manifold oldManifold) {
         Fixture a = contact.getFixtureA();
         Fixture b = contact.getFixtureB();
-        if(a.getUserData().equals("Hero") && b.getUserData().equals("Coins")){
-            GameScreen.bodeToDelete.add(b.getBody());
-        }
-        if(b.getUserData().equals("Hero") && a.getUserData().equals("Coins")){
-            GameScreen.bodeToDelete.add(a.getBody());
-        }
+
     }
 
     @Override
