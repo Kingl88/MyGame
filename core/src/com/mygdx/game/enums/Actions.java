@@ -1,5 +1,5 @@
 package com.mygdx.game.enums;
 
 public enum Actions {
-    STAND, RUN, JUMP;
+    STAND, RUN, JUMP, SHOOT;
 }

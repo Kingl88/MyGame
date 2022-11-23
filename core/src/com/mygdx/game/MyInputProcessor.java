@@ -22,12 +22,13 @@ public class MyInputProcessor implements InputProcessor {
         switch (inKey) {
             case "LEFT", "A" -> outForce.add(-0.05f, 0);
             case "RIGHT", "D" -> outForce.add(0.05f, 0);
-            case "DOWN", "S" -> outForce.add(0, -0.25f);
-            case "SPACE" -> {
+            case "UP", "W" -> {
                 if (Man.canJump && Man.onGround) {
                     outForce.add(0, 0.25f);
                 }
+                ;
             }
+            case "SPACE" -> Man.isFire = true;
         }
         return true;
     }
@@ -38,8 +39,11 @@ public class MyInputProcessor implements InputProcessor {
         switch (inKey) {
             case "LEFT", "A" -> outForce.add(-outForce.x, 0);
             case "RIGHT", "D" -> outForce.add(-outForce.x, 0);
-            case "DOWN", "S" -> outForce.add(0, -outForce.y);
-            case "SPACE" -> outForce.add(0, -outForce.y);
+            case "UP", "W" -> outForce.add(0, -outForce.y);
+            case "SPACE" -> {
+                Man.isFire = false;
+                Man.canJump = true;
+            }
         }
         return true;
     }

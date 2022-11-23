@@ -26,10 +26,16 @@ public class MyContactListener implements ContactListener {
             isDamage = true;
         }
         if (a.getUserData().equals("Hero") && b.getUserData().equals("CoinsSensor")) {
-            GameScreen.bodeToDelete.add(b.getBody());
+            GameScreen.bodyToDelete.add(b.getBody());
         }
         if (b.getUserData().equals("Hero") && a.getUserData().equals("CoinsSensor")) {
-            GameScreen.bodeToDelete.add(a.getBody());
+            GameScreen.bodyToDelete.add(a.getBody());
+        }
+        if (a.getUserData().equals("bullet") && b.getUserData().equals("stone")) {
+            GameScreen.bodyToDelete.add(a.getBody());
+        }
+        if (b.getUserData().equals("bullet") && a.getUserData().equals("stone")) {
+            GameScreen.bodyToDelete.add(b.getBody());
         }
 
     }
