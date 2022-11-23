@@ -20,6 +20,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.*;
+import com.mygdx.game.persons.Bullet;
 import com.mygdx.game.persons.Man;
 
 import java.util.ArrayList;
@@ -45,13 +46,15 @@ public class GameScreen implements Screen {
 
     private int[] layers;
     private final Man man;
-    public static List<Body> bodeToDelete = new ArrayList<>();
+    public static int bulletsCount;
+    public static List<Body> bodyToDelete = new ArrayList<>();;
+    public static List<Bullet> bulletToDelete= new ArrayList<>();;
 
     public GameScreen(Game game) {
+        bulletsCount = 100;
         coinAnm = new MyAnim("Full Coins.png", 1, 8, 12, Animation.PlayMode.LOOP);
         this.game = game;
         font = new MyFont(30);
-
         map = new TmxMapLoader().load("map/MarioWorld.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
@@ -63,7 +66,7 @@ public class GameScreen implements Screen {
         Array<RectangleMapObject> objects = map.getLayers().get("env").getObjects().getByType(RectangleMapObject.class);
         objects.addAll(map.getLayers().get("dyn").getObjects().getByType(RectangleMapObject.class));
         for (int i = 0; i < objects.size; i++) {
-           body = physX.addObject(objects.get(i));
+            body = physX.addObject(objects.get(i));
         }
 
         body = physX.addObject((RectangleMapObject) map.getLayers().get("hero").getObjects().get("Hero"));
@@ -82,6 +85,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
+
     @Override
     public void show() {
 
@@ -96,15 +100,29 @@ public class GameScreen implements Screen {
         camera.zoom = 1;
         camera.update();
 
-        if(MyContactListener.isDamage){man.getHit(1);}
+        if (MyContactListener.isDamage) {
+            man.getHit(1);
+        }
 
         mapRenderer.setView(camera);
         mapRenderer.render();
 
         man.setTime(delta);
         body.applyForceToCenter(inputProcessor.getVector(), true);
-        man.setFPS(body.getLinearVelocity());
-
+        Body tmpBody = man.setFPS(body.getLinearVelocity());
+        if(tmpBody != null && bulletsCount >= 0){
+            bulletsCount--;
+            bulletToDelete.add(new Bullet(physX, tmpBody.getPosition().x, tmpBody.getPosition().y, man.getDir()));
+        }
+        ArrayList<Bullet> bulletTemp = new ArrayList<>();
+        for(Bullet b: bulletToDelete){
+            Body tBody = b.update(delta);
+            if (tBody != null) {
+                bodyToDelete.add(tBody);
+                bulletTemp.add(b);
+            }
+        }
+        bulletToDelete.removeAll(bulletTemp);
         Rectangle tmp = man.getRect(camera, man.getFrame());
         ((PolygonShape) body.getFixtureList().get(0).getShape()).setAsBox(tmp.width / 2, tmp.height / 2);
         ((PolygonShape) body.getFixtureList().get(1).getShape()).setAsBox(tmp.width / 3, tmp.height / 10, new Vector2(0, -tmp.height / 2), 0);
@@ -124,23 +142,25 @@ public class GameScreen implements Screen {
             float cH = tr.getRegionHeight() / PhysX.PPM / dScale;
             body.setFixedRotation(true);
             ((PolygonShape) body.getFixtureList().get(0).getShape()).setAsBox(cW / 2, cH / 2);
-            ((PolygonShape) body.getFixtureList().get(1).getShape()).setAsBox(cW/1.3f, cH/1.3f);
+            ((PolygonShape) body.getFixtureList().get(1).getShape()).setAsBox(cW / 1.3f, cH / 1.3f);
             batch.draw(coinAnm.draw(), cx, cy, cW * physX.PPM, cH * physX.PPM);
         }
-        font.draw(batch, "HP: " + (int)man.getHit(0) + " Coins: " + countCoins, (int)tmp.x, (int)(tmp.y + 2 * tmp.height * PhysX.PPM));
+        font.draw(batch, "HP: " + (int) man.getHit(0) + " Coins: " + countCoins, (int) tmp.x, (int) (tmp.y + 2 * tmp.height * PhysX.PPM));
         batch.end();
-        for (Body body : bodeToDelete) {
+        for (Body body : bodyToDelete) {
+            if(body.getUserData() != null && body.getUserData().equals("Coins")){
+                countCoins++;
+            }
             physX.removeBody(body);
-            countCoins++;
         }
-        bodeToDelete.clear();
+        bodyToDelete.clear();
         physX.step();
         physX.debugDraw(camera);
         if (countCoins == countCoinsForWin) {
             dispose();
             game.setScreen(new WinScreen(game));
         }
-        if (man.getHit(0) < 0){
+        if (man.getHit(0) < 0) {
             dispose();
             game.setScreen(new GameOverScreen(game));
         }

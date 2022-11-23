@@ -71,12 +71,12 @@ public class PhysX {
             body.getFixtureList().get(1).setSensor(true);
         }
         if (name.equals("flame")) {
-            polygonShape.setAsBox((rect.width/1.5f) / PPM, (rect.height/1.5f) / PPM);
+            polygonShape.setAsBox((rect.width / 1.7f) / PPM, (rect.height / 1.7f) / PPM);
             body.createFixture(fdef).setUserData("flameSensor");
             body.getFixtureList().get(1).setSensor(true);
         }
         if (name.equals("Coins")) {
-            polygonShape.setAsBox(rect.width/1.3f / PPM, rect.height/1.3f / PPM);
+            polygonShape.setAsBox(rect.width / 1.3f / PPM, rect.height / 1.3f / PPM);
             body.createFixture(fdef).setUserData("CoinsSensor");
             body.getFixtureList().get(1).setSensor(true);
         }
@@ -84,6 +84,22 @@ public class PhysX {
         return body;
     }
 
+    public Body addBullet(float x, float y) {
+        BodyDef def = new BodyDef();
+        FixtureDef fdef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+        def.type = BodyDef.BodyType.DynamicBody;
+        def.position.set(x, y);
+        polygonShape.setAsBox(1 / PPM, 2 / PPM);
+        fdef.shape = polygonShape;
+        Body body;
+        body = world.createBody(def);
+        body.setUserData("bullet");
+        body.createFixture(fdef).setUserData("bullet");
+        body.getFixtureList().get(0).setSensor(true);
+        polygonShape.dispose();
+        return body;
+    }
     public void debugDraw(Camera camera) {
         dDebugRenderer.render(world, camera.combined);
     }
