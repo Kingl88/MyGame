@@ -37,6 +37,12 @@ public class MyContactListener implements ContactListener {
         if (b.getUserData().equals("bullet") && a.getUserData().equals("stone")) {
             GameScreen.bodyToDelete.add(b.getBody());
         }
+        if (a.getUserData().equals("bullet") && b.getUserData().equals("break")) {
+            GameScreen.bodyToDelete.add(b.getBody());
+        }
+        if (b.getUserData().equals("bullet") && a.getUserData().equals("break")) {
+            GameScreen.bodyToDelete.add(a.getBody());
+        }
 
     }
 
