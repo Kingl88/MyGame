@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="82" height="26" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="50">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="82" height="26" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="53">
  <tileset firstgid="1" name="Mario" tilewidth="8" tileheight="8" spacing="1" tilecount="25080" columns="132">
   <image source="Mario.png" width="1188" height="1711"/>
  </tileset>
  <layer id="1" name="back" width="82" height="26">
   <data encoding="base64" compression="zlib">
-   eJztzjkOwkAQRNHKPE7ZCeyTYZOw3AawgbthSFguQiVzgJEsGaT/pC91ZS0BAAAAAPA7DoV0dCfXuNad3cVdi6G/+x+jUhq7iZu6mZu7hVuWQ38HAAAA9OeWSZ27u0fGTt3RKkiVq906sFN39PT9cm/3CezUHW1yaet2bp+zUzf68wUNNthx
+   eJzt0CkOwmAYhOFJWNpadkTxSCQSyR1YDMtt2PEYJBJJguEACBIWw3IRpqKGBvEnDU3JPMmb9Kv6M4CIyP9bJ4L/jg7QtLH/+WNirJoM/vN2PFja0cTmy44N7Wiklgr+83bcpbWjie2XHeva0Qj3wsnB6jPuu4/6bSJxNHKBMZuwKZuxOVuwpRv16+IjUwGyLMfyrMCKrMTKlahfJyIiIiISnrMFXNiV3SzdprevZQNt1mFdW7fp7bvz+8Ge7GXrNr19PQfoswEbOrpNbwnPGwQd7n8=
   </data>
  </layer>
  <objectgroup id="3" name="env">
@@ -63,6 +63,33 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
+  <object id="50" name="break" x="555.682" y="24.0606" width="4.13636" height="49.303">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="51" name="break" x="558.182" y="67.6667" width="41.6667" height="5.33333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="52" name="break" x="599.818" y="24.4242" width="4.18182" height="43.4242">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="4" name="dyn">
   <object id="29" name="Coins" x="488" y="109.333" width="9.33333" height="14.6667">
@@ -74,7 +101,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="41" name="Coins" x="531.333" y="80.6667" width="16.6667" height="19.3333">
+  <object id="41" name="Coins" x="571.325" y="22.9622" width="16.6667" height="19.3333">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>

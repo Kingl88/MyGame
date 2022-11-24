@@ -5,7 +5,12 @@ import com.mygdx.game.PhysX;
 
 public class Bullet {
     private final Body body;
-    private final static float SPD = 120;
+
+    public Body getBody() {
+        return body;
+    }
+
+    private final static float SPD = 60;
     private float time;
 
     public Bullet(PhysX physX, float x, float y, int dir) {
